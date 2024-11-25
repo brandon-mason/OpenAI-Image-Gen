@@ -9,6 +9,7 @@ public class DrawContentPanel extends AbstractContentPanel {
             JComboBox<String> modelComboBox, 
             JTextArea promptArea,
             JTextArea responseArea,
+            GenImagePanel genImagePanel,
             String apiKey) {
                 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -33,9 +34,18 @@ public class DrawContentPanel extends AbstractContentPanel {
         addLabelAndTextComponent("Prompt:", promptArea, gbc, row++);
 
         SendDrawRequestButtonListener listener = new SendDrawRequestButtonListener(
-                modelComboBox, promptArea, responseArea, apiKey);
+                modelComboBox, promptArea, responseArea, genImagePanel, apiKey);
 
         addButton("Send to OpenAI", listener, gbc, row++);
         addLabelAndTextComponent("Response:", responseArea, gbc, row++);
+
+        // Add image panel for generated images
+        gbc.gridx = 0;
+        gbc.gridy = row++;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        genImagePanel.setPreferredSize(new Dimension(600, 600));
+        add(genImagePanel, gbc);
     }
 }

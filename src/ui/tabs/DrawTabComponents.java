@@ -3,12 +3,14 @@ package ui.tabs;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
+import ui.panels.GenImagePanel;
 import utilities.TextAreaMaker;
 
 public class DrawTabComponents {
     private JComboBox<String> modelComboBox;
     private JTextArea promptArea;
     private JTextArea responseArea;
+    private GenImagePanel genImagePanel;
 
     public DrawTabComponents() {
         // Initialize shared components
@@ -19,6 +21,7 @@ public class DrawTabComponents {
                 3, 30);
         responseArea = TextAreaMaker.createWrappedTextArea("", 8, 40);
         responseArea.setEditable(false);
+        genImagePanel = new GenImagePanel();
     }
 
     public JComboBox<String> getModelComboBox() {
@@ -31,5 +34,9 @@ public class DrawTabComponents {
 
     public JTextArea getResponseArea() {
         return responseArea;
+    }
+
+    public GenImagePanel getGenImagePanel() {
+        return genImagePanel;
     }
 }

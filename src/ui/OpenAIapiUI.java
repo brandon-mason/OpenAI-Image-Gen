@@ -44,6 +44,7 @@ public class OpenAIapiUI extends JFrame {
                 drawComponents.getModelComboBox(),
                 drawComponents.getPromptArea(),
                 drawComponents.getResponseArea(),
+                drawComponents.getGenImagePanel(),
                 apiKey
         );
         tabbedPane.addTab("Draw", drawTab.createTab());
