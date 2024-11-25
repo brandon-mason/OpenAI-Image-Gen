@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 
 public class SendDrawRequestButtonListener implements ActionListener {
     private JComboBox<String> modelField;
@@ -26,18 +27,27 @@ public class SendDrawRequestButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String model = (String) modelField.getSelectedItem();
-        String prompt = userPromptArea.getText();
+        genImagePanel.startLoading();
 
-        ImageGenerations chatCompletions = new ImageGenerations(apiKey, model, prompt);
-        try {
-            String responseContent = chatCompletions.execute("https://api.openai.com/v1/images/generations");
-            responseArea.setText(responseContent);
-            genImagePanel.loadImage(responseContent);
-        } catch (Exception ex) {
-            responseArea.setText("OpenAI chat response error: " + ex.getMessage());
-            
-            ex.printStackTrace();
-        }
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                String model = (String) modelField.getSelectedItem();
+                String prompt = userPromptArea.getText();
+
+                DrawCompletions chatCompletions = new DrawCompletions(apiKey, model, prompt);
+                try {
+                    String responseContent = chatCompletions.execute("https://api.openai.com/v1/images/generations");
+                    responseArea.setText(responseContent);
+                    genImagePanel.loadImage(responseContent);
+                } catch (Exception ex) {
+                    responseArea.setText("OpenAI chat response error: " + ex.getMessage());
+                    
+                    ex.printStackTrace();
+                }
+                return null;
+            }
+        };
+        worker.execute();
     }
 }

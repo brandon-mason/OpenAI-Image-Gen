@@ -3,11 +3,11 @@ package apiOperations;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ImageGenerations extends AbstractOpenAIRequest {
+public class DrawCompletions extends AbstractOpenAIRequest {
     private String model;
     private String prompt;
 
-    public ImageGenerations(String apiKey, String model, String prompt) {
+    public DrawCompletions(String apiKey, String model, String prompt) {
         super(apiKey, model); // Pass apiKey and model to the abstract class constructor
         this.model = model;
         this.prompt = prompt;
