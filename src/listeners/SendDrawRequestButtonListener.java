@@ -35,9 +35,9 @@ public class SendDrawRequestButtonListener implements ActionListener {
                 String model = (String) modelField.getSelectedItem();
                 String prompt = userPromptArea.getText();
 
-                DrawCompletions chatCompletions = new DrawCompletions(apiKey, model, prompt);
+                DrawCompletions drawCompletions = new DrawCompletions(apiKey, model, prompt);
                 try {
-                    String responseContent = chatCompletions.execute("https://api.openai.com/v1/images/generations");
+                    String responseContent = drawCompletions.execute("https://api.openai.com/v1/images/generations");
                     responseArea.setText(responseContent);
                     genImagePanel.loadImage(responseContent);
                 } catch (Exception ex) {
