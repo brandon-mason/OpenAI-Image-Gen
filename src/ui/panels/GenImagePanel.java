@@ -37,6 +37,10 @@ public class GenImagePanel extends JPanel {
         }
     }
 
+    public ImageIcon getGenImage() {
+        return genImage;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

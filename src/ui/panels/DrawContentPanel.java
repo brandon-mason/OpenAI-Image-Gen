@@ -2,7 +2,9 @@ package ui.panels;
 
 import java.awt.*;
 import javax.swing.*;
+
 import listeners.SendDrawRequestButtonListener;
+import utilities.ImageSaver;
 
 public class DrawContentPanel extends AbstractContentPanel {
     public DrawContentPanel(
@@ -32,7 +34,7 @@ public class DrawContentPanel extends AbstractContentPanel {
         add(modelComboBox, gbc);
 
         addLabelAndTextComponent("Prompt:", promptArea, gbc, row++);
-
+        
         JButton saveImageButton = new JButton("Save Image");
         saveImageButton.setEnabled(false);
         SendDrawRequestButtonListener listener = new SendDrawRequestButtonListener(
@@ -49,6 +51,9 @@ public class DrawContentPanel extends AbstractContentPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         genImagePanel.setPreferredSize(new Dimension(525, 525));
         add(genImagePanel, gbc);
+
+        ImageSaver imageSaver = new ImageSaver(genImagePanel);
+        saveImageButton.addActionListener(imageSaver);
         
         gbc.gridy = row++;
         add(saveImageButton, gbc);
