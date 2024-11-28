@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import ui.misc.FileBrowser;
 import ui.panels.GenImagePanel;
 
 public class ImageSaver implements ActionListener {
@@ -35,37 +36,9 @@ public class ImageSaver implements ActionListener {
             Graphics g = image.createGraphics();
             genImage.paintIcon(null, g, 0, 0);
             g.dispose();
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Save a file");
+            FileBrowser fileChooser = new FileBrowser();
             
-            if(imageName == null || imageName.isEmpty()) {
-                imageName = "Generated Image";
-            }
-            fileChooser.setSelectedFile(new File(imageName));
-
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG Images", "png");
-            fileChooser.setFileFilter(filter);
-
-            boolean showBrowser = true;
-            while(showBrowser) {
-                int userSelection = fileChooser.showSaveDialog(null);
-                if(userSelection == JFileChooser.APPROVE_OPTION) {
-                    File fileToSave = fileChooser.getSelectedFile();
-                    if(!fileToSave.getAbsolutePath().endsWith(".png")) {
-                        fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
-                    }
-                    if(fileToSave.exists()) {
-                        int result = JOptionPane.showConfirmDialog(null, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_OPTION);
-                        if(result == JOptionPane.NO_OPTION) {
-                            continue;
-                        }
-                    }
-                    ImageIO.write(image, "png", fileToSave);
-                    showBrowser = false;
-                } else {
-                    showBrowser = false;
-                }
-            }
+            ImageIO.write(image, "png", fileChooser.getSelectedFile());
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Failed to save image.", "Error",
                     JOptionPane.ERROR_MESSAGE);
