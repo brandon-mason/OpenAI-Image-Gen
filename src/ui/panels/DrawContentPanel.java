@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import listeners.SendDrawRequestButtonListener;
+import listeners.TextAreaDocumentListener;
 import utilities.ImageSaver;
 
 public class DrawContentPanel extends AbstractContentPanel {
@@ -32,7 +33,7 @@ public class DrawContentPanel extends AbstractContentPanel {
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.WEST;
         add(modelComboBox, gbc);
-
+        
         addLabelAndTextComponent("Prompt:", promptArea, gbc, row++);
         
         JButton saveImageButton = new JButton("Save Image");
@@ -44,14 +45,14 @@ public class DrawContentPanel extends AbstractContentPanel {
                 modelComboBox, promptArea, responseArea, genImagePanel, sendButton, saveImageButton, apiKey);
         sendButton.addActionListener(listener);
 
-                modelComboBox, promptArea, responseArea, genImagePanel, saveImageButton, apiKey);
-
+        promptArea.getDocument().addDocumentListener(new TextAreaDocumentListener(listener, promptArea));
+                
         gbc.gridy = row++;
         add(sendButton, gbc);
 
         addLabelAndTextComponent("Response:", responseArea, gbc, row++);
         responseArea.setFocusable(false);
-
+        
         // Add image panel for generated images
         gbc.gridx = 0;
         gbc.gridy = row++;
