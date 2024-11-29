@@ -1,9 +1,7 @@
 package ui.misc;
 
 import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,7 +9,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FileBrowser extends JFileChooser {
     private File selectedFile;
     private String imageName;
-    private int option = 0;
 
     public FileBrowser()  {
         setDialogTitle("Save a file");

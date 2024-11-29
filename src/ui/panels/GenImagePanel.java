@@ -13,7 +13,7 @@ public class GenImagePanel extends JPanel {
     public void startLoading() {
         try {
             // Load gif from resources directory
-            URL loaderUrl = getClass().getClassLoader().getResource("resources/Loader.gif");
+            URL loaderUrl = ClassLoader.getSystemClassLoader().getResource("resources/Loader.gif");
             if (loaderUrl == null) {
                 throw new IllegalArgumentException("Gif not found in resources");
             }
@@ -27,13 +27,10 @@ public class GenImagePanel extends JPanel {
     public void loadImage(String imageUrl) {
         try {
             URL url = new URL(imageUrl);
-            if(url == null) {
-                throw new MalformedURLException("URL does not point to an image.");
-            }
             this.genImage = new ImageIcon(url);
             repaint();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            this.genImage = null;
         }
     }
 

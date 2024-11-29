@@ -4,13 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ui.misc.FileBrowser;
 import ui.panels.GenImagePanel;
@@ -18,14 +15,9 @@ import ui.panels.GenImagePanel;
 public class ImageSaver implements ActionListener {
     private GenImagePanel genImagePanel;
     private BufferedImage image;
-    private String imageName;
 
     public ImageSaver(GenImagePanel genImagePanel) {
         this.genImagePanel = genImagePanel;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
     }
 
     @Override

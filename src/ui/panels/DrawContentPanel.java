@@ -36,12 +36,21 @@ public class DrawContentPanel extends AbstractContentPanel {
         addLabelAndTextComponent("Prompt:", promptArea, gbc, row++);
         
         JButton saveImageButton = new JButton("Save Image");
+        JButton sendButton = new JButton("Send to OpenAI");
         saveImageButton.setEnabled(false);
+        sendButton.setEnabled(true);
+        
         SendDrawRequestButtonListener listener = new SendDrawRequestButtonListener(
+                modelComboBox, promptArea, responseArea, genImagePanel, sendButton, saveImageButton, apiKey);
+        sendButton.addActionListener(listener);
+
                 modelComboBox, promptArea, responseArea, genImagePanel, saveImageButton, apiKey);
 
-        addButton("Send to OpenAI", listener, gbc, row++);
+        gbc.gridy = row++;
+        add(sendButton, gbc);
+
         addLabelAndTextComponent("Response:", responseArea, gbc, row++);
+        responseArea.setFocusable(false);
 
         // Add image panel for generated images
         gbc.gridx = 0;

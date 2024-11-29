@@ -16,22 +16,31 @@ public class SendDrawRequestButtonListener implements ActionListener {
     private JTextArea userPromptArea, responseArea;
     private GenImagePanel genImagePanel;
     private JButton saveImageButton;
+    private JButton sendButton;
     private String apiKey;
 
     public SendDrawRequestButtonListener(JComboBox<String> modelField, JTextArea userPromptArea,
-            JTextArea responseArea, GenImagePanel genImagePanel, JButton saveImageButton, String apiKey) {
+            JTextArea responseArea, GenImagePanel genImagePanel, JButton sendButton, JButton saveImageButton, String apiKey) {
         this.modelField = modelField;
         this.userPromptArea = userPromptArea;
         this.responseArea = responseArea;
         this.genImagePanel = genImagePanel;
         this.saveImageButton = saveImageButton;
+        this.sendButton = sendButton;
         this.apiKey = apiKey;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void sendRequest() {
+        if(userPromptArea.getText().isEmpty()) {
+            responseArea.setText("Prompt cannot be empty.");
+            return;
+        }
+
         genImagePanel.startLoading();
+        sendButton.setEnabled(false);
         saveImageButton.setEnabled(false);
+        userPromptArea.setEditable(false);
+        userPromptArea.setFocusable(false);
 
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
             @Override
@@ -46,13 +55,24 @@ public class SendDrawRequestButtonListener implements ActionListener {
                     genImagePanel.loadImage(responseContent);
                     saveImageButton.setEnabled(true);
                 } catch (Exception ex) {
-                    responseArea.setText("OpenAI chat response error: " + ex.getMessage());
-                    
+                    genImagePanel.loadImage(null);
                     ex.printStackTrace();
                 }
                 return null;
             }
+
+            @Override
+            protected void done() {
+                userPromptArea.setEditable(true);
+                userPromptArea.setFocusable(true);
+                sendButton.setEnabled(true);
+            }
         };
         worker.execute();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        sendRequest();
     }
 }
