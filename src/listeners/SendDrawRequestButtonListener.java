@@ -37,6 +37,7 @@ public class SendDrawRequestButtonListener implements ActionListener {
         }
 
         genImagePanel.startLoading();
+        modelField.setEnabled(false);
         sendButton.setEnabled(false);
         saveImageButton.setEnabled(false);
         userPromptArea.setEditable(false);
@@ -63,6 +64,7 @@ public class SendDrawRequestButtonListener implements ActionListener {
 
             @Override
             protected void done() {
+                modelField.setEnabled(true);
                 userPromptArea.setEditable(true);
                 userPromptArea.setFocusable(true);
                 sendButton.setEnabled(true);
