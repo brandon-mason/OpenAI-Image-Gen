@@ -1,9 +1,5 @@
 {
-    "java.project.sourcePaths": [
-        "src"
-    ],
-    "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "/Users/brandon/coding/Fall 24/cs3354/midterm_xtra/lib/org.json-chargebee-1.0.jar"
-    ]
+    "gradle.debug": false,
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

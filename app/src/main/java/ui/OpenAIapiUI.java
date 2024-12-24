@@ -16,7 +16,7 @@ public class OpenAIapiUI extends JFrame {
         apiKey = ApiKeyLoader.loadApiKey();
 
         // Set up UI
-        setTitle("OpenAI Chat Example");
+        setTitle("OpenAI Image Generator");
         setSize(800, 1200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -34,7 +34,7 @@ public class OpenAIapiUI extends JFrame {
                 chatComponents.getUserPromptArea(),
                 chatComponents.getResponseArea(),
                 apiKey);
-        tabbedPane.addTab("Chat", chatTab.createTab());
+        // tabbedPane.addTab("Chat", chatTab.createTab());
 
         // Create DrawTab components
         DrawTabComponents drawComponents = new DrawTabComponents();

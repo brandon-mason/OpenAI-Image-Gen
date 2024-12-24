@@ -10,7 +10,7 @@ public class ImagePanel extends JPanel {
         super.paintComponent(g);
         try {
             // Load image from resources directory
-            URL imageUrl = ClassLoader.getSystemClassLoader().getResource("resources/TeslaBugsInClassRoom.png");
+            URL imageUrl = ClassLoader.getSystemClassLoader().getResource("TeslaBugsInClassRoom.png");
             if (imageUrl == null) {
                 throw new IllegalArgumentException("Image not found in resources");
             }

@@ -1,11 +1,20 @@
+# Ignore Gradle project-specific cache directory
+.gradle
 
-src/.DS_Store
+# Ignore vscode configuration files
+.vscode
 
+# Ignore Gradle build output directory
+build
+
+bin
 bin/
+bin/*
+
+
+*.class
+.class
 
 .env
 
 .DS_Store
-
-.vscode/
-.vscode/settings.json

@@ -13,7 +13,7 @@ public class GenImagePanel extends JPanel {
     public void startLoading() {
         try {
             // Load gif from resources directory
-            URL loaderUrl = ClassLoader.getSystemClassLoader().getResource("resources/Loader.gif");
+            URL loaderUrl = ClassLoader.getSystemClassLoader().getResource("Loader.gif");
             if (loaderUrl == null) {
                 throw new IllegalArgumentException("Gif not found in resources");
             }
